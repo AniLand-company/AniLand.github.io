@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>ALPHA Discord Bot</title>
+  <link rel="icon" href="images/alpha_bot.png">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --main-bg: #0F172A;
+      --card-bg: #1F2430;
+      --accent: #5865F2;
+      --accent-hover: #4752C4;
+      --text: #FFFFFF;
+      --text-muted: #B9BBBE;
+      --radius: 16px;
+      --shadow: 0 8px 24px rgba(0,0,0,0.3);
+      --gradient-border: linear-gradient(135deg, #06E6FF, #FFE251, #FF6EC7);
+      --section-title: linear-gradient(90deg, #06E6FF, #FFE251);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--main-bg);
+      color: var(--text);
+      font-family: 'Montserrat', sans-serif;
+      line-height: 1.4;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .bot-avatar {
+      width: 120px; height: 120px;
+      border-radius: 50%;
+      background: var(--main-bg);
+      display: inline-block;
+      padding: 4px;
+      position: relative;
+    }
+    .bot-avatar::after {
+      content: '';
+      position: absolute; inset: 0;
+      border-radius: 50%;
+      padding: 4px;
+      background: var(--gradient-border);
+      -webkit-mask:
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+      -webkit-mask-composite: destination-out;
+              mask-composite: exclude;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin: 16px 0 8px;
+      background: var(--section-title);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .description {
+      color: var(--text-muted);
+      font-size: 1rem;
+      max-width: 600px;
+      margin: 0 auto 16px;
+    }
+    .btn-invite {
+      display: inline-block;
+      padding: 12px 32px;
+      background: var(--accent);
+      color: var(--text);
+      font-weight: 600;
+      border-radius: var(--radius);
+      text-decoration: none;
+      transition: transform .2s, background .2s;
+      box-shadow: var(--shadow);
+    }
+    .btn-invite:hover {
+      background: var(--accent-hover);
+      transform: translateY(-3px);
+    }
+    section.commands {
+      display: block;
+      margin-top: 32px;
+    }
+    .command-category {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform .3s, box-shadow .3s;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+    .command-category:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.4);
+    }
+    .command-category::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: var(--gradient-border);
+    }
+    .category-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .category-header h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      background: var(--section-title);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .category-desc {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+    .command-category ul {
+      list-style: none;
+    }
+    .command-category li {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      font-size: 0.98rem;
+    }
+    .command-category li span,
+    .command-category li a {
+      display: inline-block;
+      background: var(--main-bg);
+      color: var(--accent);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-family: 'Montserrat', monospace;
+      margin-right: 8px;
+      white-space: nowrap;
+      text-decoration: none;
+    }
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin: 40px 0 20px;
+    }
+    @media (max-width:600px){
+      h1 { font-size: 2rem; }
+      .description { font-size: .95rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="bot-avatar">
+        <img src="images/alpha_bot.png" alt="ALPHA Bot" style="width:100%;height:100%;border-radius:50%;">
+      </div>
+      <h1>ALPHA Discord Bot</h1>
+      <p class="description">
+        Многофункциональный бот для модерации, развлечений и полезных команд — всё, чтобы сделать ваш сервер лучше.
+      </p>
+      <a href="ВАША_ССЫЛКА_НА_ПРИГЛАШЕНИЕ" class="btn-invite">➕ Добавить на сервер</a>
+    </header>
+
+    <section class="commands">
+      <!-- JS рендерит категории сюда -->
+    </section>
+
+    <footer>
+      © 2025 ALPHA Discord Bot | Создано endermanhack19_second
+    </footer>
+  </div>
+
+  <script type="application/json" id="commands-data">
+  {
+    "categories": {
+      "Основные": {
+        "emoji": "🔑",
+        "description": "Доступны всем участникам.",
+        "commands": [
+          {"name":"/key","description":""},
+          {"name":"/help","description":""},
+          {"name":"/tictactoe","description":""},
+          {"name":"/user","description":"Информация о пользователе."},
+          {"name":"/emoji","description":"Получить изображение эмодзи."},
+          {"name":"/notification","description":"Напоминания."},
+          {"name":"/reaction","description":"Аниме реакции."},
+          {"name":"/anime","description":"Поиск аниме."},
+          {"name":"/image","description":"Создать изображение."},
+          {"name":"/animal","description":""},
+          {"name":"/weather","description":""},
+          {"name":"/server","description":""}
+        ]
+      },
+      "Персонал": {
+        "emoji": "👑",
+        "description": "Команды для персонала.",
+        "commands": [
+          {"name":"/ver roles","description":"Установить роль для верификации (удаляет роль)."},
+          {"name":"/ver image","description":"Установить изображение для Embed."},
+          {"name":"/ver start","description":"Запустить процесс верификации."},
+          {"name":"/clear","description":"Очистить последние сообщения или по участнику."},
+          {"name":"/say","description":"Отправить сообщение от имени бота."},
+          {"name":"/embed","description":"Создать сообщение на основе JSON."},
+          {"name":"/antiinvite","description":"Анти-инвайт блокирует ссылки."},
+          {"name":"/welcome","description":"Приветственное сообщение."},
+          {"name":"/webhook","description":"Перехватчик WebHook."},
+          {"name":"/ticket","description":""},
+          {"name":"/broadcast","description":""}
+        ]
+      },
+      "Приложения": {
+        "emoji": "📱",
+        "description": "ПКМ → Приложения",
+        "commands": [
+          {"name":"Рассылка (Бета)","description":"Отправляет рассылку в ЛС всем участникам."},
+          {"name":"Создать ветку","description":"Легкое создание веток для обсуждений."},
+          {"name":"Translations","description":"Переводчик от Google."}
+        ]
+      },
+      "Premium": {
+        "emoji": "💎",
+        "description": "Premium команды",
+        "commands": [
+          {"name":"/joker","description":"Получить случайный анекдот."},
+          {"name":"/role","description":"Управлять ролями."},
+          {"name":"/chat","description":"Установить канал для GPT‑чата."}
+        ]
+      },
+      "Ссылки": {
+        "emoji": "🔗",
+        "description": "Поддержать проект",
+        "commands": [
+          {"name":"YooMoney","url":"https://yoomoney.ru/to/4100116335747355","description":"Все деньги уйдут на оплату хостинга."},
+          {"name":"Boosty","url":"https://boosty.to/aniland_ds","description":"Все деньги уйдут на оплату хостинга."},
+          {"name":"Документация","url":"https://aniland.gitbook.io/","description":"Здесь вы найдёте описание команд и их функционал."},
+          {"name":"Discord","url":"https://discord.gg/qmvVsk94wN","description":"Помощь по боту."},
+          {"name":"EndermanHack19","url":"https://discord.com/users/425583484619456512","description":"Связаться со мной."}
+        ]
+      }
+    }
+  }
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const data = JSON.parse(document.getElementById('commands-data').textContent);
+      const container = document.querySelector('.commands');
+      for (let [title, cat] of Object.entries(data.categories)) {
+        const card = document.createElement('div');
+        card.className = 'command-category';
+        let list = '';
+        for (let cmd of cat.commands) {
+          if (cmd.url) {
+            list += `<li><a href="${cmd.url}" target="_blank">${cmd.name}</a>— ${cmd.description}</li>`;
+          } else {
+            list += `<li><span>${cmd.name}</span>— ${cmd.description}</li>`;
+          }
+        }
+        card.innerHTML = `
+          <div class="category-header">
+            <h3>${cat.emoji} ${title}</h3>
+          </div>
+          <p class="category-desc">${cat.description}</p>
+          <ul>${list}</ul>
+        `;
+        container.appendChild(card);
+      }
+    });
+  </script>
+</body>
+</html>
